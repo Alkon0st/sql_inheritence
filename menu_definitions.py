@@ -33,6 +33,7 @@ add_menu = Menu('add', 'Please indicate what you want to add:', [
     Option("Major to Student", "add_major_student(sess)"),
     Option("Student to Section", "add_student_section(sess)"),
     Option("Section to Student", "add_section_student(sess)"),
+    Option("Letter Grade Enrollment", "add_letter_grade_enrollment(sess)"),
     Option("Exit", "pass")
 ])
 
@@ -46,6 +47,7 @@ delete_menu = Menu('delete', 'Please indicate what you want to delete from:', [
     Option("Major to Student", "delete_major_student(sess)"),
     Option("Student to Section", "delete_student_section(sess)"),
     Option("Section to Student", "delete_section_student(sess)"),
+    Optiion("Enrollment", "delete_enrollment(sess)"),
     Option("Exit", "pass")
 ])
 
@@ -60,6 +62,7 @@ list_menu = Menu('list', 'Please indicate what you want to list:', [
     Option("Section to Student", "list_section_student(sess)"),
     Option("Student to Major", "list_student_major(sess)"),
     Option("Major to Student", "list_major_student(sess)"),
+    Option("Enrollments", "list_enrollments(sess)"),
     Option("Exit", "pass")
 ])
 

@@ -8,12 +8,6 @@ from Enrollment import Enrollment
 from QuerySelect import select_department, select_section, select_student, select_major
 from db_connection import Session
 
-def list_enrollments(session: Session):
-    enrollments = session.query(Enrollment).all()
-    for enrollment in enrollments:
-        print(f"Enrollment ID: {enrollment.studentId}, Student ID: {enrollment.studentId}, Section ID: {enrollment.section}")
-        if isinstance(enrollment, LetterGrade):
-            print(f"  Letter Grade: {enrollment.min_satisfactory}")
 
 def list_department(session: Session):
     """
