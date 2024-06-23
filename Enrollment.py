@@ -41,7 +41,7 @@ class Enrollment(Base):
         ),
     )
     # Polymorphism stuff
-     __mapper_args__ = {
+    __mapper_args__ = {
          "polymorphic_identity": "enrollment", "polymorphic_on": "type"
      }
 
