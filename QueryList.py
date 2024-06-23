@@ -8,7 +8,15 @@ from Enrollment import Enrollment
 from QuerySelect import select_department, select_section, select_student, select_major
 from db_connection import Session
 
-
+def list_enrollments():
+    enrollments = get_all_enrollments()  # Assuming a function that fetches all enrollments
+    for enrollment in enrollments:
+        if enrollment.grade_type == 'PassFail':
+            print(enrollment)
+        elif enrollment.grade_type == 'LetterGrade':
+            print(enrollment)
+            
+            
 def list_department(session: Session):
     """
     List all departments, sorted by the abbreviation.

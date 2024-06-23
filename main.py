@@ -61,43 +61,6 @@ def boilerplate(sess: Session):
     sess.add(student3)
     sess.flush()    
 
-def create_letter_grade_enrollment(sess: Session, student, section, enrollment_date: datetime, min_satisfactory: GradeEnum):
-    existing_enrollment = sess.query(Enrollment).filter_by(
-        studentId=student.studentID,
-        departmentAbbreviation=section.departmentAbbreviation,
-        courseNumber=section.courseNumber,
-        sectionNumber=section.sectionNumber,
-        semester=section.semester,
-        sectionYear=section.sectionYear
-    ).first()
-
-    if existing_enrollment:
-        raise ValueError("Enrollment already exists for this student and section")
-
-    new_enrollment = LetterGrade(student, section, enrollment_date, min_satisfactory)
-    sess.add(new_enrollment)
-
-def list_enrollments(sess: Session):
-    enrollments = sess.query(Enrollment).all()
-    for enrollment in enrollments:
-        print(f"Enrollment ID: {enrollment.studentId}, Student ID: {enrollment.studentId}, Section ID: {enrollment.section}")
-        if isinstance(enrollment, LetterGrade):
-            print(f"  Letter Grade: {enrollment.min_satisfactory}")
-
-def delete_enrollment(sess: Session, student_id, department_abbreviation, course_number, section_number, semester, section_year):
-    enrollment = sess.query(Enrollment).filter_by(
-        studentId=student_id,
-        departmentAbbreviation=department_abbreviation,
-        courseNumber=course_number,
-        sectionNumber=section_number,
-        semester=semester,
-        sectionYear=section_year
-    ).first()
-    
-    if enrollment:
-        sess.delete(enrollment)
-    else:
-        raise ValueError("No enrollment found for this student and section")
 
 def add(sess: Session):
     add_action: str = ''

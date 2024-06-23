@@ -17,7 +17,17 @@ from StudentMajor import StudentMajor
 from QuerySelect import select_course, select_department, select_student, select_section, select_major
 from SQLAlchemyUtilities import check_unique
 
+def add_letter_grade_enrollment(student, section, min_satisfactory):
+    # Ensure no existing enrollment for the student and section
+    existing_enrollment = find_enrollment(student, section)
+    if existing_enrollment:
+        raise ValueError("Enrollment already exists for this student and section.")
+    
+    # Create new LetterGrade enrollment
+    new_enrollment = LetterGrade(student, section, min_satisfactory)
+    save_enrollment(new_enrollment)  # Assuming a function to save enrollment in the database or data structure
 
+    return new_enrollment
 
 def add_department(session: Session):
     """
