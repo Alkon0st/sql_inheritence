@@ -11,6 +11,6 @@ from configparser import ConfigParser
 config = ConfigParser()
 config.read('config.ini')               # the config.ini file has to be in the working directory.
 
-schema = config['schema']['schema name']
+schema = '028648163'
 Base = declarative_base(metadata=MetaData(schema=schema))
 metadata = Base.metadata

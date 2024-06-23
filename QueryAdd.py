@@ -13,12 +13,26 @@ from Student import Student
 from Major import Major
 from Enrollment import Enrollment
 from StudentMajor import StudentMajor
-
+from LetterGrade import LetterGrade,GradeEnum
 from QuerySelect import select_course, select_department, select_student, select_section, select_major
 from SQLAlchemyUtilities import check_unique
 
+def add_letter_grade(session: Session, student, section, enrollment_date: datetime, min_satisfactory: GradeEnum):
+    existing_enrollment = session.query(Enrollment).filter_by(
+        studentId=student.studentID,
+        departmentAbbreviation=section.departmentAbbreviation,
+        courseNumber=section.courseNumber,
+        sectionNumber=section.sectionNumber,
+        semester=section.semester,
+        sectionYear=section.sectionYear
+    ).first()
 
+    if existing_enrollment:
+        raise ValueError("Enrollment already exists for this student and section")
 
+    new_enrollment = LetterGrade(student, section, enrollment_date, min_satisfactory)
+    session.add(new_enrollment)
+    
 def add_department(session: Session):
     """
     Prompt the user for the information for a new department and validate
