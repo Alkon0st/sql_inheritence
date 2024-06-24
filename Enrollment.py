@@ -61,15 +61,3 @@ class Enrollment(Base):
 
     def __str__(self):
         return f"Enrollment- section: {self.student} section: {self.section}"
-class LetterGrade(Enrollment):
-    VALID_GRADES = {'A', 'B', 'C', 'D', 'F'}
-
-    def __init__(self, student, section, min_satisfactory):
-        super().__init__(student, section)
-        self.grade_type = 'LetterGrade'
-        if min_satisfactory not in self.VALID_GRADES:
-            raise ValueError("Invalid grade. Valid grades are A, B, C, D, F.")
-        self.min_satisfactory = min_satisfactory
-
-    def __repr__(self):
-        return f"LetterGrade(Student: {self.student}, Section: {self.section}, MinSatisfactory: {self.min_satisfactory})"

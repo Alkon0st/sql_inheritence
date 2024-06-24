@@ -8,14 +8,19 @@ from Enrollment import Enrollment
 from QuerySelect import select_department, select_section, select_student, select_major
 from db_connection import Session
 
-def list_enrollments():
-    enrollments = get_all_enrollments()  # Assuming a function that fetches all enrollments
-    for enrollment in enrollments:
-        if enrollment.grade_type == 'PassFail':
-            print(enrollment)
-        elif enrollment.grade_type == 'LetterGrade':
-            print(enrollment)
-            
+def list_enrollment(sess: Session):
+    """
+    List out all enrollment records sorted by department, course,
+    section number.
+    :param sess:    The current connection.
+    :return:        None
+    """
+    recs = sess.query(Enrollment).order_by(Enrollment.departmentAbbreviation,
+                                           Enrollment.courseNumber,
+                                           Enrollment.sectionYear).all()
+    for rec in recs:
+        print(rec)
+
             
 def list_department(session: Session):
     """

@@ -7,18 +7,6 @@ from Enrollment import Enrollment
 from QuerySelect import select_course, select_department, select_major, select_section, select_student
 from db_connection import Session
 
-def delete_enrollment(student, section):
-    enrollment = find_enrollment(student, section)
-    if not enrollment:
-        raise ValueError("Enrollment not found.")
-
-    if enrollment.grade_type == 'PassFail':
-        delete_pass_fail_enrollment(enrollment)  # Assuming a function to delete PassFail enrollment
-    elif enrollment.grade_type == 'LetterGrade':
-        delete_letter_grade_enrollment(enrollment)  # Assuming a function to delete LetterGrade enrollment
-    
-    delete_general_enrollment(enrollment)  # Assuming a function to delete general enrollment details
-
 def delete_section(sess: Session):
     """
     Delete a section if no students are enrolled

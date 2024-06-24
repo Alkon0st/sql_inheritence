@@ -24,6 +24,8 @@ menu_main = Menu('main', 'Please select one of the following options:', [
 ])
 
 add_menu = Menu('add', 'Please indicate what you want to add:', [
+        Option("Student PassFail", "add_student_PassFail(sess)"),
+    Option("StudentLetterGrade","add_student_letter_grade(sess)"),
     Option("Department", "add_department(sess)"),
     Option("Course", "add_course(sess)"),
     Option("Section", "add_section(sess)"),
@@ -47,7 +49,6 @@ delete_menu = Menu('delete', 'Please indicate what you want to delete from:', [
     Option("Major to Student", "delete_major_student(sess)"),
     Option("Student to Section", "delete_student_section(sess)"),
     Option("Section to Student", "delete_section_student(sess)"),
-    Optiion("Enrollment", "delete_enrollment(sess)"),
     Option("Exit", "pass")
 ])
 
@@ -62,7 +63,7 @@ list_menu = Menu('list', 'Please indicate what you want to list:', [
     Option("Section to Student", "list_section_student(sess)"),
     Option("Student to Major", "list_student_major(sess)"),
     Option("Major to Student", "list_major_student(sess)"),
-    Option("Enrollments", "list_enrollments(sess)"),
+    Option("Enrollment", "list_enrollment(sess)"),
     Option("Exit", "pass")
 ])
 

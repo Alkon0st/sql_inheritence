@@ -17,17 +17,23 @@ from StudentMajor import StudentMajor
 from QuerySelect import select_course, select_department, select_student, select_section, select_major
 from SQLAlchemyUtilities import check_unique
 
-def add_letter_grade_enrollment(student, section, min_satisfactory):
-    # Ensure no existing enrollment for the student and section
-    existing_enrollment = find_enrollment(student, section)
-    if existing_enrollment:
-        raise ValueError("Enrollment already exists for this student and section.")
-    
-    # Create new LetterGrade enrollment
-    new_enrollment = LetterGrade(student, section, min_satisfactory)
-    save_enrollment(new_enrollment)  # Assuming a function to save enrollment in the database or data structure
+def add_student_LetterGrade(sess):
+    student: Student
+    section: Section
+    unique_student_section: bool = False
+    while not unique_student_section:
+        student = select_student(sess)
+        section = select_section(sess)
+        pk_count: int = count_student_section(sess, student, section)
+        unique_student_section = pk_count == 0
+        if not unique_student_section:
+            print("That section already has that student enrolled in it.  Try again.")
 
-    return new_enrollment
+    #awaiting professors response on teams to see if we need to reinforce check constraint
+    student_grade = input("Please input this students grade: ")
+    letter_grade = LetterGrade(section, student, datetime.now(), student_grade)
+    sess.add(letter_grade)
+    sess.flush()
 
 def add_department(session: Session):
     """
